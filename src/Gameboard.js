@@ -19,7 +19,9 @@ class Gameboard extends Component {
                   '', '', '', '', '', '', '', '', '', '',
                   '', '', '', '', '', '', '', '', '', ''],
       totalClicks: 0,
-      shipHits: 0
+      shipHits: 0,
+      isActive: true,
+      winStatus: "",
     }
   }
 
@@ -40,7 +42,25 @@ class Gameboard extends Component {
     return isHit
   }
 
+  gameEnd = () => {
+    if (!this.state.isActive) {
+      return
+    } else if (this.state.shipHits === 5){
+      this.setState({
+        isActive: false,
+        winStatus: "You Win!"
+      })
+    } else if (this.state.totalClicks === 25) {
+      this.setState({
+        isActive: false,
+        winStatus: "You Lose!"
+      })
+      return
+    }
+  }
+
   render() {
+    this.gameEnd()
     let board = ['', '', '', '', '', '', '', '', '', '',
                     '', '', '', '', '', '', '', '', '', '',
                     '', '', '', '', '', '', '', '', '', '',
@@ -53,13 +73,18 @@ class Gameboard extends Component {
                     '', '', '', '', '', '', '', '', '', '']
     let boardRows = board.map((element, index) => {
       return (
-        <Square id={index} checkShip={this.checkShip} />
+        <Square id={index} checkShip={this.checkShip} isActive={this.state.isActive}/>
       )
     })
 
     return (
       <div className="Board">
-        <InfoBox torpedos={25 - this.state.totalClicks} shipHits={this.state.shipHits}/>
+        <InfoBox
+          torpedos={25 - this.state.totalClicks}
+          shipHits={this.state.shipHits}
+          isActive={this.state.isActive}
+          winStatus={this.state.winStatus}
+        />
         {boardRows}
       </div>
     );

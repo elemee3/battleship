@@ -5,24 +5,41 @@ class Square extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      color: 'blue'
+      color: 'blue',
+      isActive: true,
     }
   }
 
   childClick = () => {
     //totalClick
-    this.colorChanger()
-  }
-
-  colorChanger = () => {
-    if (this.props.checkShip(this.props.id)) {
-      this.setState({color: 'red'})
-    } else {
-      this.setState({color: 'white'})
+    if (this.props.isActive) {
+      this.colorChanger()
     }
   }
 
-  
+  colorChanger = () => {
+    let { isActive } = this.state
+    if ((this.state.isActive) && this.props.checkShip(this.props.id)) {
+      isActive = false
+      console.log('isActive: ' + isActive)
+      this.setState({
+        color: 'red',
+        isActive: isActive
+      })
+    } else if ((this.state.isActive) && !this.props.checkShip(this.props.id)){
+      isActive = false
+      console.log('isActive: ' + isActive)
+      this.setState({
+        color: 'white',
+        isActive: isActive
+      })
+    } else {
+      return
+    }
+    console.log('last isActive: ' + this.state.isActive)
+  }
+
+
 
   render() {
     let style = {

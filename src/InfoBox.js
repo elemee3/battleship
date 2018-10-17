@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 
 class InfoBox extends Component {
+
+
   render() {
     return (
       <div className="Info-Box">
@@ -10,6 +12,8 @@ class InfoBox extends Component {
         Torpedos Remaining: {this.props.torpedos}
         {<br />}
         Ship Hits: {this.props.shipHits}
+        {<br />}
+        {this.props.winStatus}
       </div>
     );
   }
