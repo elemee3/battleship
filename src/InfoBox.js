@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class InfoBox extends Component {
-
-
   render() {
     return (
       <div className="Info-Box">

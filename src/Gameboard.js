@@ -7,7 +7,6 @@ class Gameboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      color: 'blue',
       shipBoard: ['1', '', '1', '', '1', '', '1', '', '1', '',
                   '', '', '', '', '', '', '', '', '', '',
                   '', '', '', '', '', '', '', '', '', '',
@@ -22,6 +21,7 @@ class Gameboard extends Component {
       shipHits: 0,
       isActive: true,
       winStatus: "",
+      shipLocations: []
     }
   }
 
@@ -42,38 +42,47 @@ class Gameboard extends Component {
     return isHit
   }
 
+  onlyCheckShip = (playerMove) => {
+    if (this.state.shipBoard[playerMove] === '1') {
+      return true
+    } else if (this.state.shipBoard[playerMove] === '') {
+      return false
+    }
+  }
+
   gameEnd = () => {
     if (!this.state.isActive) {
-      return
+        return
     } else if (this.state.shipHits === 5){
-      this.setState({
-        isActive: false,
-        winStatus: "You Win!"
+        this.setState({
+          isActive: false,
+          winStatus: "You Win!"
       })
-    } else if (this.state.totalClicks === 25) {
-      this.setState({
-        isActive: false,
-        winStatus: "You Lose!"
-      })
-      return
+    } else if (this.state.totalClicks === 5) {
+      this.showShips()
     }
+  }
+
+  showShips = () => {
+    let { shipLocations } = this.state
+    for(let i=0; i<100; i++) {
+      if (this.state.shipBoard[i] !== '') {
+        shipLocations.push(i)
+      }
+    }
+    this.setState({
+      isActive: false,
+      winStatus: "You Lose!",
+      shipLocations: shipLocations
+    })
+    console.log('shipLocations: ' + this.state.shipLocations)
   }
 
   render() {
     this.gameEnd()
-    let board = ['', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '',
-                    '', '', '', '', '', '', '', '', '', '']
-    let boardRows = board.map((element, index) => {
+    let boardRows = this.state.shipBoard.map((element, index) => {
       return (
-        <Square id={index} checkShip={this.checkShip} isActive={this.state.isActive}/>
+        <Square id={index} checkShip={this.checkShip} isActive={this.state.isActive} onlyCheckShip={this.onlyCheckShip} shipLocations={this.state.shipLocations}/>
       )
     })
 

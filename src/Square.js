@@ -11,37 +11,41 @@ class Square extends Component {
   }
 
   childClick = () => {
-    //totalClick
     if (this.props.isActive) {
       this.colorChanger()
     }
   }
 
   colorChanger = () => {
-    let { isActive } = this.state
     if ((this.state.isActive) && this.props.checkShip(this.props.id)) {
-      isActive = false
-      console.log('isActive: ' + isActive)
       this.setState({
         color: 'red',
-        isActive: isActive
+        isActive: false
       })
     } else if ((this.state.isActive) && !this.props.checkShip(this.props.id)){
-      isActive = false
-      console.log('isActive: ' + isActive)
       this.setState({
         color: 'white',
-        isActive: isActive
+        isActive: false
       })
     } else {
       return
     }
-    console.log('last isActive: ' + this.state.isActive)
+  }
+
+  finalColorChange = () => {
+    // if the box is colored red, do nothing and break
+    // if the board is inactive and the box id is found in shipLocations,
+    //  change state of color to red
+    if (this.state.color === 'red') {
+      return
+    } else if (!this.props.isActive && this.props.shipLocations.includes(this.props.id)) {
+         this.setState({color: 'red'})
+    }
   }
 
 
-
   render() {
+    this.finalColorChange()
     let style = {
       backgroundColor: this.state.color
     }
