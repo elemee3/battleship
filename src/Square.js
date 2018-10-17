@@ -10,18 +10,19 @@ class Square extends Component {
   }
 
   childClick = () => {
+    //totalClick
     this.colorChanger()
   }
 
   colorChanger = () => {
     if (this.props.checkShip(this.props.id)) {
-      console.log('red')
       this.setState({color: 'red'})
     } else {
-      console.log('white')
       this.setState({color: 'white'})
     }
   }
+
+  
 
   render() {
     let style = {

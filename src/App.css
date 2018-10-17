@@ -11,9 +11,18 @@
 }
 
 .Square {
+  user-select: none;
   height: 100px;
   width: 100px;
   display: flex;
   flex-direction: row;
+  border: 1px solid black;
+}
+
+.Info-Box {
+  display: flex;
+  flex-wrap: nowrap;
+  height: 100px;
+  width: 100%;
   border: 1px solid black;
 }
