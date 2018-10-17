@@ -1,9 +1,14 @@
 .App {
   text-align: center;
+  height: 1080px;
+  width: 1020px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 3px solid black;
+  margin: 10px;
 }
 
 .Board {
-  margin: 100px;
   height: 1020px;
   width: 1020px;
   display: flex;
@@ -20,9 +25,15 @@
 }
 
 .Info-Box {
+  background-color: grey;
   display: flex;
   flex-wrap: nowrap;
-  height: 100px;
+  height: 60px;
   width: 100%;
   border: 1px solid black;
+  justify-content: space-around;
+}
+
+h1, h2 {
+  align-self: center;
 }

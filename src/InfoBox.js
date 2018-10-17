@@ -5,13 +5,13 @@ class InfoBox extends Component {
   render() {
     return (
       <div className="Info-Box">
-        Battleship!
+        <h1>Battleship!</h1>
         {<br />}
-        Torpedos Remaining: {this.props.torpedos}
+        <h2>Torpedos Remaining: {this.props.torpedos}</h2>
         {<br />}
-        Ship Hits: {this.props.shipHits}
+        <h2>Ship Hits: {this.props.shipHits}</h2>
         {<br />}
-        {this.props.winStatus}
+        <h1>{this.props.winStatus}</h1>
       </div>
     );
   }

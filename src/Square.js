@@ -5,7 +5,7 @@ class Square extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      color: 'blue',
+      color: 'transparent',
       isActive: true,
     }
   }
@@ -33,16 +33,12 @@ class Square extends Component {
   }
 
   finalColorChange = () => {
-    // if the box is colored red, do nothing and break
-    // if the board is inactive and the box id is found in shipLocations,
-    //  change state of color to red
     if (this.state.color === 'red') {
       return
     } else if (!this.props.isActive && this.props.shipLocations.includes(this.props.id)) {
-         this.setState({color: 'red'})
+       this.setState({color: 'red'})
     }
   }
-
 
   render() {
     this.finalColorChange()
@@ -51,7 +47,6 @@ class Square extends Component {
     }
     return (
       <div style={style} className="Square" onClick={this.childClick}>
-        {this.props.id}
       </div>
     );
   }
